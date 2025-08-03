@@ -1,6 +1,13 @@
 <?php
 include_once '../conexao.php';
 
+<head>
+    <meta charset="UTF-8">
+    <title>Pacientes</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+
 $pacientes = $conn->query("SELECT id, nome FROM 'pacientes');
 
 $medicos = $conn->query("SELECT id, nome FROM medicos");

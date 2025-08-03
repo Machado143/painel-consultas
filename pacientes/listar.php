@@ -1,6 +1,14 @@
 <?php
 include_once '../conexao.php';
 
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pacientes</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+
 //Busca todos os pacientes
 $sql = "SELECT * FROM pacientes";
 $resultado = $conn->query($sql);

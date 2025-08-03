@@ -1,6 +1,13 @@
 <?php 
 incldue '../conexao.php';
 
+<head>
+    <meta charset="UTF-8">
+    <title>Pacientes</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+
 $sql = "SELECT * FROM medicos";
 $resultado = $conn->query($sql);
 ?>

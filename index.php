@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Painel de Consultas</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+
 
 </head>
 

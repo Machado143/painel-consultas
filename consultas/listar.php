@@ -1,6 +1,13 @@
 <?php
 include_once '../conexao.php'; 
 
+<head>
+    <meta charset="UTF-8">
+    <title>Pacientes</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+
 $sql = "SELECT consultas.id, pacientes.nome AS paciente,, medicos.nome AS medico, data, horario, observacoes
 FROM consultas
 JOIN pacientes ON consultas.paciente_id = pacientes.id

@@ -1,5 +1,12 @@
 <?php
 
+<head>
+    <meta charset="UTF-8">
+    <title>Pacientes</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+
 $host = 'localhost';
 $usuario = 'root';
 $senha = '';
