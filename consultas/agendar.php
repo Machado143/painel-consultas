@@ -1,15 +1,7 @@
 <?php
 include_once '../conexao.php';
 
-<head>
-    <meta charset="UTF-8">
-    <title>Pacientes</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-
-
-$pacientes = $conn->query("SELECT id, nome FROM 'pacientes');
-
+$pacientes = $conn->query("SELECT id, nome FROM pacientes");
 $medicos = $conn->query("SELECT id, nome FROM medicos");
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,7 +11,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $horario = $_POST['horario'];
     $observacoes = $_POST['observacoes'];
 
-    
     $sql = "INSERT INTO consultas (paciente_id, medico_id, data, horario, observacoes) 
             VALUES ('$paciente_id', '$medico_id', '$data', '$horario', '$observacoes')";
     
@@ -32,7 +23,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-h1 >Agendar Consulta</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendar Consulta</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<h1>Agendar Consulta</h1>
 <form method="post">
     Paciente:
     <select name="paciente_id" required>
@@ -49,11 +49,18 @@ h1 >Agendar Consulta</h1>
             <option value="<?= $m['id'] ?>"><?= htmlspecialchars($m['nome']) ?></option>
         <?php endwhile; ?>
     </select><br><br>
+
     Data: <input type="date" name="data" required><br><br>
     Horário: <input type="time" name="horario" required><br><br>
-    Observaçôes: <br>
+
+    Observações: <br>
     <textarea name="observacoes" rows="4" cols="40"></textarea><br><br>
+
     <button type="submit">Agendar</button>
 </form>
+
 <br>
 <a href="listar.php">Voltar</a>
+
+</body>
+</html>

@@ -2,13 +2,6 @@
 include_once '../conexao.php';
 
 
-<head>
-    <meta charset="UTF-8">
-    <title>Pacientes</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-
-
 //Busca todos os pacientes
 $sql = "SELECT * FROM pacientes";
 $resultado = $conn->query($sql);
@@ -19,6 +12,7 @@ $resultado = $conn->query($sql);
     <head>
         <meta charset="utf-8">
         <title>Pacientes</title>
+        <link rel="stylesheet" href="../assets/css/style.css">
     </head>
     <body>
         <h1>Lista de Pacientes</h1>
@@ -32,16 +26,15 @@ $resultado = $conn->query($sql);
                 <th>Nascimento</th>
                 <th>Ações</th>
             </tr>
-            <?php while ($paciente = $resultado->fetch_assoc())  ?>
+            <?php while ($paciente = $resultado->fetch_assoc()): ?>
                 <tr>
-                    <td><?php  $paciente['=id']; ?></td>
-                    <td><?php  $paciente['=nome']; ?></td>
-                    <td><?php  $paciente['=cpf']; ?></td>
-                    <td><?php  $paciente['=telefone']; ?></td>
-                    <td><?php  $paciente['=nascimento']; ?></td>
-
+                    <td><?php echo $paciente['id']; ?></td>
+                    <td><?php echo $paciente['nome']; ?></td>
+                    <td><?php echo $paciente['cpf']; ?></td>
+                    <td><?php echo $paciente['telefone']; ?></td>
+                    <td><?php echo $paciente['nascimento']; ?></td>
                     <td>
-                        <a href="editar.php?id=<?php  $paciente['id']; ?>">Editar</a> |
+                        <a href="editar.php?id=<?php echo $paciente['id']; ?>">Editar</a> |
                         <a href="excluir.php?id=<?php echo $paciente['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
                     </td>
                 </tr>

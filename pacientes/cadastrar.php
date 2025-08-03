@@ -1,5 +1,6 @@
 <?php
 include_once '../conexao.php';
+?>
 
 <head>
     <meta charset="UTF-8">

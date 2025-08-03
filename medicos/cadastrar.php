@@ -1,13 +1,5 @@
-<?php 
-
+<?php
 include_once '../conexao.php';
-
-<head>
-    <meta charset="UTF-8">
-    <title>Pacientes</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
@@ -15,25 +7,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $especialidade = $_POST['especialidade'];
     $telefone = $_POST['telefone'];
 
-    // Insere o médico no banco de dados
-    $sql = "INSERT INTO medicos (nome, crm, especialidade, telefone) 
-    VALUES ('$nome', '$crm', '$especialidade', '$telefone')";
-    
-    if ($conn->query($sql)) {
+    // Preparar statement para evitar SQL Injection
+    $stmt = $conn->prepare("INSERT INTO medicos (nome, crm, especialidade, telefone) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $nome, $crm, $especialidade, $telefone);
+
+    if ($stmt->execute()) {
         header("Location: listar.php");
         exit();
     } else {
-        echo "Erro: " . $conn->error;
+        echo "Erro: " . $stmt->error;
     }
 }
 ?>
 
-<h1>Cadastrar médico</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cadastrar Médico</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<h1>Cadastrar Médico</h1>
 <form method="POST" action="">
     Nome: <input type="text" name="nome" required><br><br>
     CRM: <input type="text" name="crm" required><br><br>
     Especialidade: <input type="text" name="especialidade" required><br><br>
+    Telefone: <input type="text" name="telefone" required><br><br>
     <button type="submit">Salvar</button>
 </form>
 <br>
 <a href="listar.php">Voltar</a>
+
+</body>
+</html>

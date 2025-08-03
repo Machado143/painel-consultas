@@ -1,12 +1,5 @@
 <?php 
-incldue '../conexao.php';
-
-<head>
-    <meta charset="UTF-8">
-    <title>Pacientes</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-
+include '../conexao.php';
 
 $sql = "SELECT * FROM medicos";
 $resultado = $conn->query($sql);
@@ -17,6 +10,7 @@ $resultado = $conn->query($sql);
 <head>
     <meta charset="utf-8">
     <title>Médicos</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <h1>Lista de Médicos</h1>
@@ -35,13 +29,12 @@ $resultado = $conn->query($sql);
                 <td><?php echo $medico['nome']; ?></td>
                 <td><?php echo $medico['crm']; ?></td>
                 <td><?php echo $medico['especialidade']; ?></td>
-
                 <td>
-                    <a href="editar.php?id=<? $medico['id']; ?>">Editar</a> |
-                    <a href="excluir.php?id=<? $medico['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                    <a href="editar.php?id=<?php echo $medico['id']; ?>">Editar</a> |
+                    <a href="excluir.php?id=<?php echo $medico['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
                 </td>
             </tr>
-        <?php endwhile; ?>
+        <?php } ?>
     </table>
     <br>
     <a href="../index.php">Voltar ao Inicio</a>
