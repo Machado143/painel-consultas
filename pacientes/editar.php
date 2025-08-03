@@ -28,12 +28,14 @@ if (!$paciente) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
     $cpf = $_POST['cpf'];
-    $telefone = $_POST['telefone'];
     $data_nascimento = $_POST['data_nascimento'];
+    $genero = $_POST['genero'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
 
     // Atualiza os dados do paciente no banco de dados usando prepared statements
-    $stmt_update = $conn->prepare("UPDATE pacientes SET nome=?, cpf=?, telefone=?, data_nascimento=? WHERE id=?");
-    $stmt_update->bind_param("ssssi", $nome, $cpf, $telefone, $data_nascimento, $id);
+    $stmt_update = $conn->prepare("UPDATE pacientes SET nome=?, cpf=?, data_nascimento=?, genero=?, email=?, telefone=? WHERE id=?");
+    $stmt_update->bind_param("ssssssi", $nome, $cpf, $data_nascimento, $genero, $email, $telefone, $id);
 
     if ($stmt_update->execute()) {
         header("Location: listar.php");
@@ -50,15 +52,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Editar Paciente</title>
-    <link rel="stylesheet" href="../assets/css/style.css"> <!-- Link para o CSS externo -->
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <h1>Editar Paciente</h1>
     <form method="post">
         Nome: <input type="text" name="nome" value="<?= htmlspecialchars($paciente['nome']); ?>" required><br><br>
+        
         CPF: <input type="text" name="cpf" value="<?= htmlspecialchars($paciente['cpf']); ?>" required><br><br>
-        Telefone: <input type="text" name="telefone" value="<?= htmlspecialchars($paciente['telefone']); ?>" required><br><br>
+        
         Data de Nascimento: <input type="date" name="data_nascimento" value="<?= htmlspecialchars($paciente['data_nascimento']); ?>" required><br><br>
+        
+        Gênero:
+        <select name="genero" required>
+            <option value="M" <?= $paciente['genero'] == 'M' ? 'selected' : '' ?>>Masculino</option>
+            <option value="F" <?= $paciente['genero'] == 'F' ? 'selected' : '' ?>>Feminino</option>
+            <option value="O" <?= $paciente['genero'] == 'O' ? 'selected' : '' ?>>Outro</option>
+        </select><br><br>
+        
+        Email: <input type="email" name="email" value="<?= htmlspecialchars($paciente['email']); ?>" required><br><br>
+        
+        Telefone: <input type="text" name="telefone" value="<?= htmlspecialchars($paciente['telefone']); ?>" required><br><br>
+        
         <button type="submit">Salvar Mudanças</button>
     </form>
     <br>
