@@ -1,30 +1,49 @@
+/* Estilos Globais */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f2f2f2;
     padding: 20px;
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
 }
 
 h1 {
     color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
 }
 
+h2 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+/* Links */
 a {
     text-decoration: none;
     color: #007BFF;
+    transition: color 0.3s ease;
 }
 
 a:hover {
+    color: #0056b3;
     text-decoration: underline;
 }
 
+/* Tabelas */
 table {
     width: 100%;
     border-collapse: collapse;
     background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 th, td {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     text-align: left;
 }
@@ -32,26 +51,64 @@ th, td {
 th {
     background-color: #007BFF;
     color: white;
+    font-weight: bold;
 }
 
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-form input, form select, form textarea, form button {
-    padding: 8px;
-    width: 100%;
-    margin-bottom: 10px;
-    box-sizing: border-box;
+/* Formulários */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+form input, form select, form textarea, form button {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+form input:focus, form select:focus, form textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Botões */
 form button {
     background-color: #007BFF;
     color: white;
     border: none;
     cursor: pointer;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 form button:hover {
     background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    form input, form select, form textarea, form button {
+        padding: 8px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
 }
