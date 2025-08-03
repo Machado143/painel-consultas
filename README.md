@@ -1,3 +1,5 @@
+# acesso http://localhost/painel_consultas/index.php
+
 # 🏥 Deployment - Sistema de Agendamento Médico
 
 Este README apresenta estratégias completas de deployment para aplicações PHP/MySQL, especificamente otimizado para sistemas de gestão médica como este projeto.
