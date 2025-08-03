@@ -1,4 +1,3 @@
-CREATE DATABASE painel_consultas;
 
 USE painel_consultas;
 
