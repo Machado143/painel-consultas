@@ -9,7 +9,7 @@
 </head>
 
 <body>
-     <h1>bem vindo ao painel de consultas</h1>
+     <h1>Bem vindo ao painel de consultas</h1>
      <ul> 
         <li><a href="pacientes/listar.php">Pacientes</a></li>
         <li><a href="medicos/listar.php">Médicos</a></li>

@@ -4,22 +4,24 @@ include_once '../conexao.php';
 $pacientes = $conn->query("SELECT id, nome FROM pacientes");
 $medicos = $conn->query("SELECT id, nome FROM medicos");
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $paciente_id = $_POST['paciente_id'];
     $medico_id = $_POST['medico_id'];
     $data = $_POST['data'];
     $horario = $_POST['horario'];
     $observacoes = $_POST['observacoes'];
 
-    $sql = "INSERT INTO consultas (paciente_id, medico_id, data, horario, observacoes) 
-            VALUES ('$paciente_id', '$medico_id', '$data', '$horario', '$observacoes')";
+    // Using prepared statements to prevent SQL Injection
+    $stmt = $conn->prepare("INSERT INTO consultas (paciente_id, medico_id, data, horario, observacoes) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("iisss", $paciente_id, $medico_id, $data, $horario, $observacoes);
     
-    if ($conn->query($sql)) {
+    if ($stmt->execute()) {
         header("Location: listar.php");
         exit();
     } else {
-        echo "Erro: " . $conn->error;
+        echo "Erro: " . $stmt->error;
     }
+    $stmt->close();
 }
 ?>
 
@@ -28,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Agendar Consulta</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css"> <!-- Link para o CSS externo -->
 </head>
 <body>
 

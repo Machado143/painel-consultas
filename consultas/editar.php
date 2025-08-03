@@ -7,7 +7,13 @@ if (!$id) {
     exit;
 }
 
-$consulta = $conn->query("SELECT * FROM consultas WHERE id = $id")->fetch_assoc();
+$consulta_result = $conn->query("SELECT * FROM consultas WHERE id = $id");
+if ($consulta_result->num_rows === 0) {
+    echo "Consulta não encontrada.";
+    exit;
+}
+$consulta = $consulta_result->fetch_assoc();
+
 $pacientes = $conn->query("SELECT id, nome FROM pacientes");
 $medicos = $conn->query("SELECT id, nome FROM medicos");
 
@@ -27,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Erro ao atualizar: " . $stmt->error;
     }
+    $stmt->close();
 }
 ?>
 
@@ -35,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Editar Consulta</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css"> <!-- Link para o CSS externo -->
 </head>
 <body>
     <h1>Editar Consulta</h1>

@@ -15,14 +15,14 @@ $resultado = $conn->query($sql);
 <head>
     <meta charset="UTF-8" />
     <title>Lista de Consultas</title>
-    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" /> <!-- Link para o CSS externo -->
 </head>
 <body>
 
 <h1>Lista de Consultas</h1>
 <a href="agendar.php">+ Nova Consulta</a>
 
-<table border="1" cellpadding="8" cellspacing="0">
+<table>
     <tr>
         <th>ID</th>
         <th>Paciente</th>
