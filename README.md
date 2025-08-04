@@ -1,10 +1,10 @@
 # acesso http://localhost/painel_consultas/index.php
 
-# 🏥 Deployment - Sistema de Agendamento Médico
+#  Deployment - Sistema de Agendamento Médico
 
 Este README apresenta estratégias completas de deployment para aplicações PHP/MySQL, especificamente otimizado para sistemas de gestão médica como este projeto.
 
-## 📋 Índice
+##  Índice
 
 - [Visão Geral do Sistema](#-visão-geral-do-sistema)
 - [Estratégias de Deployment](#-estratégias-de-deployment)
@@ -15,7 +15,7 @@ Este README apresenta estratégias completas de deployment para aplicações PHP
 - [Monitoramento](#-monitoramento)
 - [Troubleshooting](#-troubleshooting)
 
-## 🎯 Visão Geral do Sistema
+##  Visão Geral do Sistema
 
 **Stack Tecnológica:**
 - **Backend:** PHP 7.4+ com MySQLi
@@ -24,7 +24,7 @@ Este README apresenta estratégias completas de deployment para aplicações PHP
 - **Arquitetura:** MVC simplificado
 - **Estrutura:** Modular (pacientes, médicos, consultas)
 
-## 🚀 Estratégias de Deployment
+##  Estratégias de Deployment
 
 ### 1. **Shared Hosting** 
 *Para clínicas pequenas - Mais econômico*
@@ -47,8 +47,8 @@ Este README apresenta estratégias completas de deployment para aplicações PHP
 - MySQL database
 - SSL Certificate (Let's Encrypt)
 
-**Prós:** ✅ Baixo custo ✅ Manutenção mínima  
-**Contras:** ❌ Performance limitada ❌ Controle reduzido
+**Prós:**  Baixo custo  Manutenção mínima  
+**Contras:**  Performance limitada  Controle reduzido
 
 ### 2. **VPS/Cloud** 
 *Recomendado - Melhor custo-benefício*
@@ -119,7 +119,7 @@ volumes:
   mysql_data:
 ```
 
-## 🏗️ Ambientes Recomendados
+##  Ambientes Recomendados
 
 ### Estrutura de 3 Ambientes
 
@@ -206,7 +206,7 @@ $conn->set_charset("utf8mb4");
 ?>
 ```
 
-## 📜 Scripts de Deployment
+##  Scripts de Deployment
 
 ### 1. **Script de Deploy Automático**
 
@@ -214,14 +214,14 @@ $conn->set_charset("utf8mb4");
 #!/bin/bash
 # deploy.sh
 
-echo "🚀 Iniciando deployment..."
+echo " Iniciando deployment..."
 
 # Backup do banco atual
-echo "📦 Fazendo backup..."
+echo " Fazendo backup..."
 mysqldump -u $DB_USER -p$DB_PASS painel_consultas > backup_$(date +%Y%m%d_%H%M%S).sql
 
 # Baixar código do Git
-echo "📥 Baixando código..."
+echo " Baixando código..."
 cd /var/www/html
 git pull origin main
 
@@ -229,19 +229,19 @@ git pull origin main
 # composer install --no-dev --optimize-autoloader
 
 # Aplicar migrações do banco
-echo "🗄️ Atualizando banco..."
+echo "🗄 Atualizando banco..."
 mysql -u $DB_USER -p$DB_PASS painel_consultas < migrations/latest.sql
 
 # Configurar permissões
-echo "🔐 Configurando permissões..."
+echo " Configurando permissões..."
 chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
 
 # Limpar cache (se houver)
-echo "🧹 Limpando cache..."
+echo " Limpando cache..."
 rm -rf cache/*
 
-echo "✅ Deploy concluído!"
+echo " Deploy concluído!"
 ```
 
 ### 2. **GitHub Actions para CI/CD**
@@ -283,14 +283,14 @@ jobs:
           sudo systemctl reload apache2
 ```
 
-## 🔒 Checklist de Segurança
+##  Checklist de Segurança
 
 ### **Antes do Deploy**
 - [ ] Senhas do banco alteradas (não usar 'root' sem senha)
 - [ ] SSL Certificate configurado (HTTPS)
 - [ ] Validação de entrada em todos os formulários
-- [ ] Prepared statements implementados ✅ (já feito)
-- [ ] XSS protection com `htmlspecialchars()` ✅ (já feito)
+- [ ] Prepared statements implementados  (já feito)
+- [ ] XSS protection com `htmlspecialchars()`  (já feito)
 - [ ] Error reporting desabilitado em produção
 - [ ] Backups automáticos configurados
 
@@ -330,7 +330,7 @@ header('X-XSS-Protection: 1; mode=block');
 ?>
 ```
 
-## 📊 Monitoramento
+##  Monitoramento
 
 ### **Logs Essenciais**
 ```bash
@@ -367,7 +367,7 @@ echo json_encode($health);
 ?>
 ```
 
-## 🛠️ Troubleshooting
+##  Troubleshooting
 
 ### **Problemas Comuns**
 
@@ -396,7 +396,7 @@ sudo tail -f /var/log/apache2/error.log
 mysqldump -u root -p painel_consultas > backup.sql
 ```
 
-## 🚦 Plano de Rollback
+##  Plano de Rollback
 
 ### **Em caso de problemas:**
 
@@ -420,7 +420,7 @@ git checkout HEAD~1  # Volta 1 commit
 sudo systemctl start apache2
 ```
 
-## 📚 Recursos Adicionais
+##  Recursos Adicionais
 
 ### **Hospedagem Recomendada**
 - **Iniciante:** Hostinger, UOL Host
@@ -440,6 +440,6 @@ sudo systemctl start apache2
 
 ---
 
-**💡 Dica:** Sempre teste o deployment em ambiente de staging antes de aplicar em produção!
+** Dica:** Sempre teste o deployment em ambiente de staging antes de aplicar em produção!
 
-**🆘 Suporte:** Para problemas específicos, documente o erro e mantenha logs de sistema atualizados.
+** Suporte:** Para problemas específicos, documente o erro e mantenha logs de sistema atualizados.
